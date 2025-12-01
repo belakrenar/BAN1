@@ -1,0 +1,833 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.3
+-- Dumped by pg_dump version 16.3
+
+-- Started on 2025-12-01 00:10:06 -03
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 228 (class 1259 OID 25572)
+-- Name: animais; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.animais (
+    id_animal integer NOT NULL,
+    nome character varying(20) NOT NULL,
+    idade integer NOT NULL,
+    sexo character varying(10) NOT NULL,
+    id_especie integer NOT NULL,
+    id_viveiro integer NOT NULL
+);
+
+
+ALTER TABLE public.animais OWNER TO postgres;
+
+--
+-- TOC entry 227 (class 1259 OID 25571)
+-- Name: animais_id_animal_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.animais_id_animal_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.animais_id_animal_seq OWNER TO postgres;
+
+--
+-- TOC entry 4514 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: animais_id_animal_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.animais_id_animal_seq OWNED BY public.animais.id_animal;
+
+
+--
+-- TOC entry 218 (class 1259 OID 25528)
+-- Name: atendentes; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.atendentes (
+    id_funcionario integer NOT NULL,
+    nome character varying(50) NOT NULL,
+    cpf character varying(11) NOT NULL,
+    salario integer,
+    cidade character varying(100)
+);
+
+
+ALTER TABLE public.atendentes OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 25527)
+-- Name: atendentes_id_funcionario_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.atendentes_id_funcionario_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.atendentes_id_funcionario_seq OWNER TO postgres;
+
+--
+-- TOC entry 4515 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: atendentes_id_funcionario_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.atendentes_id_funcionario_seq OWNED BY public.atendentes.id_funcionario;
+
+
+--
+-- TOC entry 222 (class 1259 OID 25546)
+-- Name: biomas; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.biomas (
+    id_bioma integer NOT NULL,
+    nome character varying(20) NOT NULL,
+    temperatura character varying(10) NOT NULL
+);
+
+
+ALTER TABLE public.biomas OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 25545)
+-- Name: biomas_id_bioma_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.biomas_id_bioma_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.biomas_id_bioma_seq OWNER TO postgres;
+
+--
+-- TOC entry 4516 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: biomas_id_bioma_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.biomas_id_bioma_seq OWNED BY public.biomas.id_bioma;
+
+
+--
+-- TOC entry 224 (class 1259 OID 25553)
+-- Name: especies; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.especies (
+    id_especie integer NOT NULL,
+    nome character varying(20) NOT NULL,
+    dieta character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.especies OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 25552)
+-- Name: especies_id_especie_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.especies_id_especie_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.especies_id_especie_seq OWNER TO postgres;
+
+--
+-- TOC entry 4517 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: especies_id_especie_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.especies_id_especie_seq OWNED BY public.especies.id_especie;
+
+
+--
+-- TOC entry 232 (class 1259 OID 25606)
+-- Name: ingressos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ingressos (
+    id_ingresso integer NOT NULL,
+    datavisita character varying(10) NOT NULL,
+    preco character varying(5) NOT NULL,
+    tipo character varying(20) NOT NULL,
+    id_visitante integer,
+    id_atendente integer,
+    horarioentrada character varying(10),
+    horariosaida character varying(10)
+);
+
+
+ALTER TABLE public.ingressos OWNER TO postgres;
+
+--
+-- TOC entry 231 (class 1259 OID 25605)
+-- Name: ingressos_id_ingresso_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.ingressos_id_ingresso_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.ingressos_id_ingresso_seq OWNER TO postgres;
+
+--
+-- TOC entry 4518 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: ingressos_id_ingresso_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.ingressos_id_ingresso_seq OWNED BY public.ingressos.id_ingresso;
+
+
+--
+-- TOC entry 230 (class 1259 OID 25589)
+-- Name: manejo; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.manejo (
+    id_manejo integer NOT NULL,
+    id_funcionario integer,
+    id_viveiro integer
+);
+
+
+ALTER TABLE public.manejo OWNER TO postgres;
+
+--
+-- TOC entry 229 (class 1259 OID 25588)
+-- Name: manejo_id_manejo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.manejo_id_manejo_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.manejo_id_manejo_seq OWNER TO postgres;
+
+--
+-- TOC entry 4519 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: manejo_id_manejo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.manejo_id_manejo_seq OWNED BY public.manejo.id_manejo;
+
+
+--
+-- TOC entry 216 (class 1259 OID 25519)
+-- Name: visitantes; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.visitantes (
+    id_visitante integer NOT NULL,
+    nome character varying(50) NOT NULL,
+    cpf character varying(11) NOT NULL,
+    celular character varying(13),
+    email character varying(150),
+    cidade character varying(100)
+);
+
+
+ALTER TABLE public.visitantes OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 25518)
+-- Name: visitantes_id_visitante_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.visitantes_id_visitante_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.visitantes_id_visitante_seq OWNER TO postgres;
+
+--
+-- TOC entry 4520 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: visitantes_id_visitante_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.visitantes_id_visitante_seq OWNED BY public.visitantes.id_visitante;
+
+
+--
+-- TOC entry 226 (class 1259 OID 25560)
+-- Name: viveiros; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.viveiros (
+    id_viveiro integer NOT NULL,
+    capacidade character varying(20) NOT NULL,
+    area character varying(10) NOT NULL,
+    id_bioma integer NOT NULL
+);
+
+
+ALTER TABLE public.viveiros OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 25559)
+-- Name: viveiros_id_viveiro_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.viveiros_id_viveiro_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.viveiros_id_viveiro_seq OWNER TO postgres;
+
+--
+-- TOC entry 4521 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: viveiros_id_viveiro_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.viveiros_id_viveiro_seq OWNED BY public.viveiros.id_viveiro;
+
+
+--
+-- TOC entry 220 (class 1259 OID 25537)
+-- Name: zeladores; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.zeladores (
+    id_funcionario integer NOT NULL,
+    nome character varying(50) NOT NULL,
+    cpf character varying(11) NOT NULL,
+    salario integer,
+    cidade character varying(100)
+);
+
+
+ALTER TABLE public.zeladores OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 25536)
+-- Name: zeladores_id_funcionario_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.zeladores_id_funcionario_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.zeladores_id_funcionario_seq OWNER TO postgres;
+
+--
+-- TOC entry 4522 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: zeladores_id_funcionario_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.zeladores_id_funcionario_seq OWNED BY public.zeladores.id_funcionario;
+
+
+--
+-- TOC entry 4314 (class 2604 OID 25575)
+-- Name: animais id_animal; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.animais ALTER COLUMN id_animal SET DEFAULT nextval('public.animais_id_animal_seq'::regclass);
+
+
+--
+-- TOC entry 4309 (class 2604 OID 25531)
+-- Name: atendentes id_funcionario; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.atendentes ALTER COLUMN id_funcionario SET DEFAULT nextval('public.atendentes_id_funcionario_seq'::regclass);
+
+
+--
+-- TOC entry 4311 (class 2604 OID 25549)
+-- Name: biomas id_bioma; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.biomas ALTER COLUMN id_bioma SET DEFAULT nextval('public.biomas_id_bioma_seq'::regclass);
+
+
+--
+-- TOC entry 4312 (class 2604 OID 25556)
+-- Name: especies id_especie; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.especies ALTER COLUMN id_especie SET DEFAULT nextval('public.especies_id_especie_seq'::regclass);
+
+
+--
+-- TOC entry 4316 (class 2604 OID 25609)
+-- Name: ingressos id_ingresso; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ingressos ALTER COLUMN id_ingresso SET DEFAULT nextval('public.ingressos_id_ingresso_seq'::regclass);
+
+
+--
+-- TOC entry 4315 (class 2604 OID 25592)
+-- Name: manejo id_manejo; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.manejo ALTER COLUMN id_manejo SET DEFAULT nextval('public.manejo_id_manejo_seq'::regclass);
+
+
+--
+-- TOC entry 4308 (class 2604 OID 25522)
+-- Name: visitantes id_visitante; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.visitantes ALTER COLUMN id_visitante SET DEFAULT nextval('public.visitantes_id_visitante_seq'::regclass);
+
+
+--
+-- TOC entry 4313 (class 2604 OID 25563)
+-- Name: viveiros id_viveiro; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.viveiros ALTER COLUMN id_viveiro SET DEFAULT nextval('public.viveiros_id_viveiro_seq'::regclass);
+
+
+--
+-- TOC entry 4310 (class 2604 OID 25540)
+-- Name: zeladores id_funcionario; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.zeladores ALTER COLUMN id_funcionario SET DEFAULT nextval('public.zeladores_id_funcionario_seq'::regclass);
+
+
+--
+-- TOC entry 4504 (class 0 OID 25572)
+-- Dependencies: 228
+-- Data for Name: animais; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.animais (id_animal, nome, idade, sexo, id_especie, id_viveiro) FROM stdin;
+2	Nina	10	F	1	1
+5	Thor	3	M	1	1
+6	Alex	5	M	1	1
+7	Zeus	5	M	3	1
+\.
+
+
+--
+-- TOC entry 4494 (class 0 OID 25528)
+-- Dependencies: 218
+-- Data for Name: atendentes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.atendentes (id_funcionario, nome, cpf, salario, cidade) FROM stdin;
+1	Laura	22222222222	6000	Curitiba
+\.
+
+
+--
+-- TOC entry 4498 (class 0 OID 25546)
+-- Dependencies: 222
+-- Data for Name: biomas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.biomas (id_bioma, nome, temperatura) FROM stdin;
+1	Savana	35 graus
+5	Floresta	25
+6	Tundra	5
+\.
+
+
+--
+-- TOC entry 4500 (class 0 OID 25553)
+-- Dependencies: 224
+-- Data for Name: especies; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.especies (id_especie, nome, dieta) FROM stdin;
+1	Leao	Carnivora
+3	hipopotamo	herbivoro
+\.
+
+
+--
+-- TOC entry 4508 (class 0 OID 25606)
+-- Dependencies: 232
+-- Data for Name: ingressos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.ingressos (id_ingresso, datavisita, preco, tipo, id_visitante, id_atendente, horarioentrada, horariosaida) FROM stdin;
+1	24/11/2025	50	inteira	1	1	\N	\N
+2	28/11/2025	50	inteira	1	1	\N	\N
+3	30/11/2025	50	inteira	1	1	\N	\N
+4	30/11/2025	20	meia	2	1	\N	\N
+\.
+
+
+--
+-- TOC entry 4506 (class 0 OID 25589)
+-- Dependencies: 230
+-- Data for Name: manejo; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.manejo (id_manejo, id_funcionario, id_viveiro) FROM stdin;
+1	2	2
+2	2	1
+\.
+
+
+--
+-- TOC entry 4492 (class 0 OID 25519)
+-- Dependencies: 216
+-- Data for Name: visitantes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.visitantes (id_visitante, nome, cpf, celular, email, cidade) FROM stdin;
+1	Ana	12345678910	47 997203317	ana@email.com	Florianopolis
+2	Joao	10000100001	47 998881167	joao@email.com	Blumenau
+\.
+
+
+--
+-- TOC entry 4502 (class 0 OID 25560)
+-- Dependencies: 226
+-- Data for Name: viveiros; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.viveiros (id_viveiro, capacidade, area, id_bioma) FROM stdin;
+1	10	200	1
+2	20	300	1
+\.
+
+
+--
+-- TOC entry 4496 (class 0 OID 25537)
+-- Dependencies: 220
+-- Data for Name: zeladores; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.zeladores (id_funcionario, nome, cpf, salario, cidade) FROM stdin;
+1	Pedro	33333333333	4000	Florianopolis
+2	Lucas	44444444444	3000	Sao Paulo
+\.
+
+
+--
+-- TOC entry 4523 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: animais_id_animal_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.animais_id_animal_seq', 7, true);
+
+
+--
+-- TOC entry 4524 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: atendentes_id_funcionario_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.atendentes_id_funcionario_seq', 1, true);
+
+
+--
+-- TOC entry 4525 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: biomas_id_bioma_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.biomas_id_bioma_seq', 6, true);
+
+
+--
+-- TOC entry 4526 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: especies_id_especie_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.especies_id_especie_seq', 3, true);
+
+
+--
+-- TOC entry 4527 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: ingressos_id_ingresso_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.ingressos_id_ingresso_seq', 4, true);
+
+
+--
+-- TOC entry 4528 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: manejo_id_manejo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.manejo_id_manejo_seq', 2, true);
+
+
+--
+-- TOC entry 4529 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: visitantes_id_visitante_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.visitantes_id_visitante_seq', 2, true);
+
+
+--
+-- TOC entry 4530 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: viveiros_id_viveiro_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.viveiros_id_viveiro_seq', 2, true);
+
+
+--
+-- TOC entry 4531 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: zeladores_id_funcionario_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.zeladores_id_funcionario_seq', 2, true);
+
+
+--
+-- TOC entry 4336 (class 2606 OID 25577)
+-- Name: animais animais_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.animais
+    ADD CONSTRAINT animais_pkey PRIMARY KEY (id_animal);
+
+
+--
+-- TOC entry 4322 (class 2606 OID 25535)
+-- Name: atendentes atendentes_cpf_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.atendentes
+    ADD CONSTRAINT atendentes_cpf_key UNIQUE (cpf);
+
+
+--
+-- TOC entry 4324 (class 2606 OID 25533)
+-- Name: atendentes atendentes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.atendentes
+    ADD CONSTRAINT atendentes_pkey PRIMARY KEY (id_funcionario);
+
+
+--
+-- TOC entry 4330 (class 2606 OID 25551)
+-- Name: biomas biomas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.biomas
+    ADD CONSTRAINT biomas_pkey PRIMARY KEY (id_bioma);
+
+
+--
+-- TOC entry 4332 (class 2606 OID 25558)
+-- Name: especies especies_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.especies
+    ADD CONSTRAINT especies_pkey PRIMARY KEY (id_especie);
+
+
+--
+-- TOC entry 4340 (class 2606 OID 25611)
+-- Name: ingressos ingressos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ingressos
+    ADD CONSTRAINT ingressos_pkey PRIMARY KEY (id_ingresso);
+
+
+--
+-- TOC entry 4338 (class 2606 OID 25594)
+-- Name: manejo manejo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.manejo
+    ADD CONSTRAINT manejo_pkey PRIMARY KEY (id_manejo);
+
+
+--
+-- TOC entry 4318 (class 2606 OID 25526)
+-- Name: visitantes visitantes_cpf_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.visitantes
+    ADD CONSTRAINT visitantes_cpf_key UNIQUE (cpf);
+
+
+--
+-- TOC entry 4320 (class 2606 OID 25524)
+-- Name: visitantes visitantes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.visitantes
+    ADD CONSTRAINT visitantes_pkey PRIMARY KEY (id_visitante);
+
+
+--
+-- TOC entry 4334 (class 2606 OID 25565)
+-- Name: viveiros viveiros_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.viveiros
+    ADD CONSTRAINT viveiros_pkey PRIMARY KEY (id_viveiro);
+
+
+--
+-- TOC entry 4326 (class 2606 OID 25544)
+-- Name: zeladores zeladores_cpf_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.zeladores
+    ADD CONSTRAINT zeladores_cpf_key UNIQUE (cpf);
+
+
+--
+-- TOC entry 4328 (class 2606 OID 25542)
+-- Name: zeladores zeladores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.zeladores
+    ADD CONSTRAINT zeladores_pkey PRIMARY KEY (id_funcionario);
+
+
+--
+-- TOC entry 4342 (class 2606 OID 25578)
+-- Name: animais animais_id_especie_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.animais
+    ADD CONSTRAINT animais_id_especie_fkey FOREIGN KEY (id_especie) REFERENCES public.especies(id_especie);
+
+
+--
+-- TOC entry 4343 (class 2606 OID 25583)
+-- Name: animais animais_id_viveiro_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.animais
+    ADD CONSTRAINT animais_id_viveiro_fkey FOREIGN KEY (id_viveiro) REFERENCES public.viveiros(id_viveiro);
+
+
+--
+-- TOC entry 4346 (class 2606 OID 25617)
+-- Name: ingressos ingressos_id_atendente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ingressos
+    ADD CONSTRAINT ingressos_id_atendente_fkey FOREIGN KEY (id_atendente) REFERENCES public.atendentes(id_funcionario);
+
+
+--
+-- TOC entry 4347 (class 2606 OID 25612)
+-- Name: ingressos ingressos_id_visitante_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ingressos
+    ADD CONSTRAINT ingressos_id_visitante_fkey FOREIGN KEY (id_visitante) REFERENCES public.visitantes(id_visitante);
+
+
+--
+-- TOC entry 4344 (class 2606 OID 25595)
+-- Name: manejo manejo_id_funcionario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.manejo
+    ADD CONSTRAINT manejo_id_funcionario_fkey FOREIGN KEY (id_funcionario) REFERENCES public.zeladores(id_funcionario);
+
+
+--
+-- TOC entry 4345 (class 2606 OID 25600)
+-- Name: manejo manejo_id_viveiro_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.manejo
+    ADD CONSTRAINT manejo_id_viveiro_fkey FOREIGN KEY (id_viveiro) REFERENCES public.viveiros(id_viveiro);
+
+
+--
+-- TOC entry 4341 (class 2606 OID 25566)
+-- Name: viveiros viveiros_id_bioma_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.viveiros
+    ADD CONSTRAINT viveiros_id_bioma_fkey FOREIGN KEY (id_bioma) REFERENCES public.biomas(id_bioma);
+
+
+-- Completed on 2025-12-01 00:10:06 -03
+
+--
+-- PostgreSQL database dump complete
+--
+
